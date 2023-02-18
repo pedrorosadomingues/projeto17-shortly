@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const validateToken = (req, res, next) => {
-    const { Authorization } = req.headers;
-    if (!Authorization) {
+    const { authorization } = req.headers;
+    
+    if (!authorization) {
         return res.status(401).send("Unauthorized");
     }
-    
-    const token = Authorization.split(" ")[1];
+
+    const token = authorization.split(" ")[1];
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_SECRET);

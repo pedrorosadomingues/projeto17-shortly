@@ -1,14 +1,17 @@
 import { db } from '../database/database.connection.js';
-import { nanoid } from 'nanoid';
+import { nanoid, customAlphabet } from 'nanoid';
 
 export const shortenUrl = async (req, res) => {
-    
-    const { url } = req.body;
-    url.id = nanoid();
-    try {
-       const { id, shortUrl} = await db.query("INSERT INTO urls (shortUrl, url) VALUES ($1, $2) RETURNING urls.id, url.shortUrl", [url.id, url]);
 
-         res.status(201).send({ id, shortUrl });
+    const { url } = req.body;
+    const nanoid = customAlphabet(url, 5);
+    const shortenUrl = nanoid();
+    const userId = res.locals.id;
+
+    try {
+        const returnUrl = await db.query("INSERT INTO urls (\"shortUrl\", url, \"userId\") VALUES ($1, $2, $3) RETURNING urls.id, urls.\"shortUrl\"", [shortenUrl, url, userId]);
+
+        res.status(201).json(returnUrl.rows[0]);
 
     } catch (error) {
         console.log(error);
