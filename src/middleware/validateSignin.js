@@ -18,10 +18,13 @@ export const validateSignin = async (req, res, next) => {
             return res.status(401).send("Invalid Credentials");
         }
 
-        const token = jwt.sign({ id: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '1h'});
+        const token = jwt.sign(
+            { id: user.rows[0].id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' });
         res.locals = { token };
         next();
-        
+
     } catch (error) {
         console.log(error);
 

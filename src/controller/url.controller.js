@@ -17,5 +17,30 @@ export const shortenUrl = async (req, res) => {
         console.log(error);
         res.status(500).send("Server Error");
     }
+}
 
+export const getUrlById = async (req, res) => {
+    
+    const urlInfo = res.locals.urlInfo;
+
+    res.status(200).json(urlInfo);
+  
+}
+
+
+export const redirectToUrl = async (req, res) => {
+    
+    const urlInfo = res.locals.urlInfo;
+
+    const url = urlInfo.url;
+
+    try {
+        
+        await db.query("UPDATE urls SET \"totalClicks\" = \"totalClicks\" + 1 WHERE id = $1", [urlInfo.id]);
+        res.redirect(url);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
 }

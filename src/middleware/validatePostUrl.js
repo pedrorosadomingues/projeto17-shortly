@@ -1,6 +1,6 @@
 import { db } from '../database/database.connection.js';
 
-export const validateUrl = async (req, res, next) => {
+export const validatePostUrl = async (req, res, next) => {
     const { url } = req.body;
 
     try {
