@@ -1,6 +1,7 @@
 import { db } from '../database/database.connection.js';
 import { nanoid, customAlphabet } from 'nanoid';
 
+
 export const shortenUrl = async (req, res) => {
 
     const { url } = req.body;
@@ -43,4 +44,18 @@ export const redirectToUrl = async (req, res) => {
         console.log(error);
         res.status(500).send("Server Error");
     }
+}
+
+export const deleteUrlById = async (req, res) => {
+    
+    const shortUrlId = req.params.id;
+
+    try {
+        await db.query("DELETE FROM urls WHERE id = $1", [shortUrlId]);
+        res.sendStatus(204);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+
 }

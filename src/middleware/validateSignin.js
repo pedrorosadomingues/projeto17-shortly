@@ -19,7 +19,8 @@ export const validateSignin = async (req, res, next) => {
         }
 
         const token = jwt.sign(
-            { id: user.rows[0].id },
+            { id: user.rows[0].id,
+              name: user.rows[0].name, },
             process.env.JWT_SECRET,
             { expiresIn: '1h' });
         res.locals = { token };

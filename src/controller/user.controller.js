@@ -20,3 +20,27 @@ export const userLogin = async (req, res) => {
     res.status(200).send({ token });
 
 }
+
+export const getShortenedUrlsByUser = async (req, res) => {
+
+    const {id, name} = res.locals
+
+    try {
+        const sumTotalClicks = await db.query("SELECT SUM(\"totalClicks\") AS \"visitCount\" FROM urls WHERE \"userId\" = $1", [id]);
+
+        const userUrls = await db.query("SELECT id, \"shortUrl\", url, \"totalClicks\" AS  \"visitCount\" FROM urls WHERE \"userId\" = $1", [id]);
+        
+        const bodyReturn = {
+            id,
+            name,
+            visitCount: sumTotalClicks.rows[0].visitCount,
+            shortenedUrls: userUrls.rows
+        }
+
+        res.status(200).json(bodyReturn);
+       
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+}
