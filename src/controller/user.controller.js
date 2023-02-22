@@ -44,3 +44,15 @@ export const getShortenedUrlsByUser = async (req, res) => {
         res.status(500).send("Server Error");
     }
 }
+
+export const getRanking = async (req, res) => {
+
+    try {
+        const ranking = await db.query("SELECT users.id, users.name,  COUNT(urls.\"userId\") AS \"linksCount\", SUM(urls.\"totalClicks\") AS \"visitCount\" FROM users INNER JOIN urls ON users.id = urls.\"userId\" GROUP BY users.id ORDER BY \"visitCount\" DESC LIMIT 10");
+
+        res.status(200).json(ranking.rows);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+}

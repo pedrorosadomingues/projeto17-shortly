@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, userLogin, getShortenedUrlsByUser } from '../controller/user.controller.js';
+import { createUser, userLogin, getShortenedUrlsByUser, getRanking } from '../controller/user.controller.js';
 import { validateToken } from '../middleware/validateToken.js';
 import { validateSignup } from '../middleware/validateSignup.js';
 import { validateSignin } from '../middleware/validateSignin.js';
@@ -12,6 +12,8 @@ const router = Router();
 router.post('/signup', validateSchema(signupSchema), validateSignup, createUser);
 router.post('/signin', validateSchema(signinSchema), validateSignin, userLogin);
 router.get('/users/me', validateToken, getShortenedUrlsByUser);
+router.get('/ranking', getRanking);
+
 
 
 export default router;

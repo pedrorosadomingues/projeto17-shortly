@@ -5,8 +5,8 @@ import { nanoid, customAlphabet } from 'nanoid';
 export const shortenUrl = async (req, res) => {
 
     const { url } = req.body;
-    const nanoid = customAlphabet(url, 5);
-    const shortenUrl = nanoid();
+    
+    const shortenUrl = nanoid(8);
     const userId = res.locals.id;
 
     try {
