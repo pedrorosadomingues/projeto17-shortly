@@ -2,7 +2,6 @@ import { db } from '../database/database.connection.js';
 
 export const validateGetUrl = async (req, res, next) => {
     const { id , shortUrl} = req.params;
-
     const param = id || shortUrl;
     const type = id ? "id" : "shortUrl";
 
