@@ -12,7 +12,7 @@ export const validateToken = (req, res, next) => {
     const token = authorization.split(" ")[1];
 
     try {
-        const { id, name } = jwt.verify(token, process.env.JWT_SECRET);
+        const { id, name } = jwt.verify(token, `shortlytoken`);
         res.locals = { id, name };
         next();
     } catch (error) {
