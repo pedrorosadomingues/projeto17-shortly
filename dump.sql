@@ -29,7 +29,7 @@ CREATE TABLE public.urls (
     url text NOT NULL,
     "shortUrl" text NOT NULL,
     "userId" integer NOT NULL,
-    "createdAt" timestamp DEFAULT now() NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL,
     "totalClicks" integer DEFAULT 0 NOT NULL
 );
 
@@ -61,9 +61,9 @@ ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying(50) NOT NULL,
-    email character varying(20) NOT NULL unique,
+    email character varying(20) NOT NULL,
     password text NOT NULL,
-    "createdAt" timestamp DEFAULT now() NOT NULL
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -105,38 +105,26 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (24, 'https://www.notion.so/asdabootcampra/Projeto-17-Shortly-API-c306c707e7504d32a689e0ff6gfhjdffdfgfdb8e3', 's-hb:', 1, '2023-02-18', 0);
-INSERT INTO public.urls VALUES (26, 'https://www.notion.so/asdabootcampra/Projeto-17-Shortly-API-c306c707e7504d32a689e0ff6gfasdhjdffdfgfdb8e3', 'ws/id', 1, '2023-02-18', 0);
-INSERT INTO public.urls VALUES (29, 'https://docs.google.com/spreadsheets/d/10kpg_v1LMip6Dh-0BbIj2VsZhKgQnU_hp3hu1lPlUoc/edit#gid=574073890', 'gdeh_', 1, '2023-02-18', 0);
-INSERT INTO public.urls VALUES (17, 'https://www.notion.sodfg/bootcaaampgra/Projeto-17-Shortly-API-c306c707e7504d32a6asda89e0ff6dffsdfsbdfg8ea3', '7orwr', 1, '2023-02-18', 1);
-INSERT INTO public.urls VALUES (31, 'https://www.google.com/', 'wp:t/', 2, '2023-02-22', 0);
-INSERT INTO public.urls VALUES (32, 'https://www.globo.com/', 'gc/oh', 2, '2023-02-22', 0);
-INSERT INTO public.urls VALUES (10, 'https://www.notion.so/bootcaaampgra/Projeto-17-Shortly-API-c306c707e7504d32a689e0ff6dffbdfg8e3', 'ct6Ay', 1, '2023-02-18', 2);
-INSERT INTO public.urls VALUES (33, 'https://www.instagram.com/', 'ShRjBj9GIhpbrcUnMovvz', 2, '2023-02-22', 7);
-INSERT INTO public.urls VALUES (34, 'https://www.facebook.com/', 'NmBl3WPi', 3, '2023-02-22', 10);
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$uhZLXfUne52e7ELc382HbOzH4f1QxNuX4R4ZtU5KDdWyO6U6sm5KK', '2023-02-18');
-INSERT INTO public.users VALUES (2, 'João', 'joao2@driven.com.br', '$2b$10$fmY7kENaD4HvN1C.sYf9.e3av.1HdaeIKye8dKi8LOcoAowUUUtdq', '2023-02-21');
-INSERT INTO public.users VALUES (3, 'João3', 'joao3@driven.com.br', '$2b$10$4pV0kFdf39QVMQtDdXRw5OuQk5c10UbZ52fsTI1mpFi3xmWxSl9by', '2023-02-22');
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 34, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 3, true);
+SELECT pg_catalog.setval('public.users_id_seq', 1, false);
 
 
 --
@@ -145,14 +133,6 @@ SELECT pg_catalog.setval('public.users_id_seq', 3, true);
 
 ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
-
-
---
--- Name: urls urls_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.urls
-    ADD CONSTRAINT "urls_shortUrl_key" UNIQUE ("shortUrl");
 
 
 --
