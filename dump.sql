@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.6 (Ubuntu 14.6-0ubuntu0.22.04.1)
--- Dumped by pg_dump version 14.6 (Ubuntu 14.6-0ubuntu0.22.04.1)
+-- Dumped from database version 14.7 (Ubuntu 14.7-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.7 (Ubuntu 14.7-0ubuntu0.22.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -111,6 +111,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.users VALUES (1, 'João3', 'joao3@driven.com.br', '$2b$10$W3C2NTxcrdpAl3RX6H4nXOVVSs5FfybEKkCz1Hku9gA/cAzfJZarS', '2023-03-01 15:24:35.40107');
+INSERT INTO public.users VALUES (2, 'João', 'joao@driven.com.br', '$2b$10$2N/aC4l8cSyKw4g2RuyGDeANv1ccir.eMrfpOpDH5BJiarzwUXMV.', '2023-03-01 16:55:06.366846');
 
 
 --
@@ -124,7 +126,7 @@ SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 
 --

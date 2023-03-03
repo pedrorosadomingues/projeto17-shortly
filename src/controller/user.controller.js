@@ -1,4 +1,4 @@
-import { db } from '../database/database.connection.js';
+import  { db } from '../database/database.connection.js';
 import bcrypt from 'bcrypt';
 
 export const createUser = async (req, res) => {
